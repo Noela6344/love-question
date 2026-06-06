@@ -1,60 +1,115 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Important Question ❤️</title>
+    <title>Hi Darling ❤️</title>
+
     <style>
         body{
             font-family: Arial, sans-serif;
             text-align:center;
-            background:#ffe6f2;
-            padding-top:100px;
+            background: linear-gradient(135deg,#ffe6f2,#fff0f5);
+            padding-top:70px;
         }
+
+        .box{
+            display:none;
+            animation: fade 0.8s ease-in-out;
+        }
+
+        .active{
+            display:block;
+        }
+
         button{
-            padding:15px 30px;
+            padding:15px 25px;
             font-size:18px;
             margin:10px;
             border:none;
-            border-radius:10px;
+            border-radius:12px;
             cursor:pointer;
+            transition:0.3s;
         }
+
+        button:hover{
+            transform:scale(1.05);
+        }
+
         .yes{background:#4CAF50;color:white;}
         .no{background:#ff4d4d;color:white;}
+
+        h1,h2{
+            margin-bottom:20px;
+        }
+
+        @keyframes fade{
+            from{opacity:0; transform:translateY(20px);}
+            to{opacity:1; transform:translateY(0);}
+        }
+
+        .final{
+            font-size:24px;
+            color:#d63384;
+            margin-top:30px;
+        }
     </style>
 </head>
+
 <body>
 
-<div id="question1">
-    <h1>❤️ Do you love me? ❤️</h1>
-    <button class="yes" onclick="showQuestion2()">Yes 😍</button>
-    <button class="no" onclick="showNo()">No 😢</button>
+<!-- SCREEN 1 -->
+<div id="q1" class="box active">
+    <h1>Hi darling ❤️</h1>
+    <h2>Just to be sure… are you really my person? 🥺</h2>
+    <button class="yes" onclick="next('q2')">Yes 😍</button>
+    <button class="no" onclick="noAnswer()">No 😢</button>
 </div>
 
-<div id="question2" style="display:none;">
-    <h1>🥰 Yayyy! 🥰</h1>
-    <h2>When are we kissing? 😘</h2>
-    <button onclick="answer('Soon 😘')">Soon 😘</button>
-    <button onclick="answer('Very Soon 💋')">Very Soon 💋</button>
-    <button onclick="answer('ASAP ❤️')">ASAP ❤️</button>
+<!-- SCREEN 2 -->
+<div id="q2" class="box">
+    <h1>Okay… let’s test this 😏</h1>
+    <h2>What’s your favorite thing about me? 💕</h2>
+    <button onclick="next('q3')">Your smile 😍</button>
+    <button onclick="next('q3')">Your vibe 💫</button>
+    <button onclick="next('q3')">Everything ❤️</button>
 </div>
 
+<!-- SCREEN 3 -->
+<div id="q3" class="box">
+    <h1>Hmm… interesting 👀</h1>
+    <h2>Final question…</h2>
+    <h2>When are we meeting? 😌</h2>
+
+    <button onclick="final('Soon 😘')">Soon 😘</button>
+    <button onclick="final('Very soon 💋')">Very soon 💋</button>
+    <button onclick="final('ASAP ❤️')">ASAP ❤️</button>
+</div>
+
+<!-- RESULT -->
 <div id="result"></div>
 
 <script>
-function showQuestion2(){
-    document.getElementById("question1").style.display="none";
-    document.getElementById("question2").style.display="block";
+
+function next(id){
+    document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
 }
 
-function showNo(){
+function final(text){
+    document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
+
     document.getElementById("result").innerHTML =
-    "<h1>😢 Ouch! My heart!</h1>";
+    "<h1>😍 You're almost there...</h1>" +
+    "<h2 class='final'>" + text + "</h2>" +
+    "<h3>Now I’m smiling like crazy 😌💖</h3>";
 }
 
-function answer(text){
-    document.getElementById("question2").style.display="none";
+function noAnswer(){
+    document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
+
     document.getElementById("result").innerHTML =
-    "<h1>😍 " + text + " 😍</h1>";
+    "<h1>🥺 Aww okay...</h1><h2>I’ll wait for you 💔</h2>";
 }
+
 </script>
 
 </body>
